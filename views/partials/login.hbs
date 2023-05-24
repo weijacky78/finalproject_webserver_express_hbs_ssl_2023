@@ -1,0 +1,17 @@
+{{#if login.loggedIn}}
+<div class="loggedin">Welcome back {{login.user.username}},
+	<div>[
+		<a href="?logout">Logout</a>
+		<a href="/user">Profile</a>
+		]
+	</div>
+</div>
+{{else}}
+<form action="/login" method="post">
+	<input type="hidden" name="action" value="login"> {{!-- ?action=login --}}
+	<input type="hidden" name="redirect" value="{{redirect}}"> {{!-- &redirect=... --}}
+	<input type="text" name="username" placeholder="Username"> {{!-- &username=... --}}
+	<input type="password" name="password" placeholder="Password"> {{!-- &password=... --}}
+	<input type="submit" value="Login">
+</form>
+{{/if}}
