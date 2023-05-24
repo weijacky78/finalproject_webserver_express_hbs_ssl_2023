@@ -8,13 +8,17 @@ router.use(cors());
 /* GET home page. */
 router.get('/', async function (req, res, next) {
 
-    let url = `http://api.weatherapi.com/v1/forecast.json?key=98e9f5f3121141e1b07162521231205 &q=Ottawa, Canada&aqi=no`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=45.4028986&lon=-75.683692&appid=82dc1d787a7efd97503ecec1a230ad4f&units=metric`;
     let fetch = await cache.fetchUrl(url);
     let out = {
-        "date": fetch.current.last_updated,
-        "wDescriptions": fetch.current.condition.text,
-        "wIcon": fetch.current.condition.icon,
-        "temperature": fetch.current.temp_c,
+        "city": fetch.name,
+        "country": fetch.sys.country,
+        "wDescriptions": fetch.weather.description,
+        "wIcon": fetch.weather.icon,
+        "temp_min": fetch.main.temp_min,
+        "temp_max": fetch.main.temp_max,
+        "humidity": fetch.main.humidity,
+        "feels_like_temp": fetch.main.feels_like
 
     };
     res.json(out);
